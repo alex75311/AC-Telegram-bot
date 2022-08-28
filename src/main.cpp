@@ -151,19 +151,6 @@ state acState;
 // settings
 char deviceName[] = "AC Remote Control";
 
-
-void blink(int timeout = 1000) 
-{
-  digitalWrite(pinLed, LOW);
-  
-  if (millis() - led_lasttime > timeout)
-  {
-    digitalWrite(pinLed, HIGH);
-    led_lasttime = millis();
-  }
-}
-
-
 void getDHT() {
   Serial.println("=================================");
   Serial.println("Sample DHT11...");
@@ -178,7 +165,6 @@ void getDHT() {
   Serial.print((int)temperature); Serial.print(" *C, "); 
   Serial.print((int)humidity); Serial.println(" H");
   }
-
 
 String get_keyboard() {
   String keyboardJson = "[";
@@ -225,7 +211,6 @@ void send_ok(String& chat_id){
   save_config();
 }
 
-
 void handleNewMessages(int numNewMessages)
 {
   Serial.println("handleNewMessages");
@@ -241,29 +226,7 @@ void handleNewMessages(int numNewMessages)
       continue;
     }
 
-    String from_name = bot.messages[i].from_name;
-    if (from_name == "")
-      from_name = "Guest";
-
-    if (text == "/send_test_action")
-    {
-      bot.sendChatAction(chat_id, "typing");
-      delay(4000);
-      bot.sendMessage(chat_id, "Did you see the action message?");
-
-      // You can't use own message, just choose from one of bellow
-
-      //typing for text messages
-      //upload_photo for photos
-      //record_video or upload_video for videos
-      //record_audio or upload_audio for audio files
-      //upload_document for general files
-      //find_location for location data
-
-      //more info here - https://core.telegram.org/bots/api#sendchataction
-    }
-
-    else if (text == "AC_ON"){
+    if (text == "AC_ON"){
       ac.on(); ac.send(); send_ok(chat_id);
       continue;
     }
@@ -418,13 +381,10 @@ void loop() {
     int numNewMessages = bot.getUpdates(bot.last_message_received + 1);
     while (numNewMessages)
     {
-      // blink(3000);
       Serial.println("got response");
-      handleNewMessages(numNewMessages);
       numNewMessages = bot.getUpdates(bot.last_message_received + 1);
     }
 
     bot_lasttime = millis();
-    // blink(1000);
   }
 }
