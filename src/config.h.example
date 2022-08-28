@@ -1,0 +1,2 @@
+#define BOT_TOKEN ""
+#define ADMIN_CHAT ""   // admin telegram chat ID

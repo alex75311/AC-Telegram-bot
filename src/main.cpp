@@ -8,6 +8,8 @@
 #include <ESP8266WiFi.h>
 #include <UniversalTelegramBot.h>
 
+#include <config.h>
+
 //// ###### User configuration space for AC library classes ##########
 
 #include <ir_Tcl.h>  //  replace library based on your AC unit model, check https://github.com/crankyoldgit/IRremoteESP8266
@@ -117,9 +119,6 @@ std::string power_to_str(uint8_t mode)
 const uint16_t kIrLed = 4;
 const int pinDHT11 = 12;
 int pinLed = LED_BUILTIN;
-
-#define BOT_TOKEN "5441844353:AAEU2sjXWEoghOBUkA7oVBAgU6mD9xvHNTY"
-#define ADMIN_CHAT "373712890"
 
 // Library initialization, change it according to the imported library file.
 IRTcl112Ac ac(kIrLed);
