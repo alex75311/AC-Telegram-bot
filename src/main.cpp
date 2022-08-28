@@ -236,10 +236,10 @@ void handleNewMessages(int numNewMessages)
     String chat_id = bot.messages[i].chat_id;
     String text = bot.messages[i].text;
 
-    // if (chat_id != ADMIN_CHAT) {
-    //   bot.sendMessage(chat_id, "Ваш ID в списке разрешенных отсутствует");
-    //   continue;
-    // }
+    if (chat_id != ADMIN_CHAT) {
+      bot.sendMessage(chat_id, "Ваш ID в списке разрешенных отсутствует");
+      continue;
+    }
 
     String from_name = bot.messages[i].from_name;
     if (from_name == "")
