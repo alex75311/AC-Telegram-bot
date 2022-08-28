@@ -310,9 +310,7 @@ void handleNewMessages(int numNewMessages)
     }
       else
     {
-      String welcome = "Welcome to Universal Arduino Telegram Bot library, " + from_name + ".\n";
-      welcome += "This is Chat Action Bot example.\n\n";
-      welcome += "/send_test_action : to send test chat action message\n";
+      String welcome = "Управление кондиционером через телеграм";
       bot.sendMessageWithReplyKeyboard(chat_id, welcome, "", get_keyboard(), true);
       continue;
     }
@@ -382,6 +380,7 @@ void loop() {
     while (numNewMessages)
     {
       Serial.println("got response");
+      handleNewMessages(numNewMessages);
       numNewMessages = bot.getUpdates(bot.last_message_received + 1);
     }
 
