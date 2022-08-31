@@ -183,6 +183,7 @@ void save_config() {
   jsonConfig["temperature"] = ac.getTemp();
   jsonConfig["swingVertical"] = ac.getSwingVertical();
   jsonConfig["fan"] = ac.getFan();
+  jsonConfig["powerStatus"] = ac.getPower();
   File config = SPIFFS.open("/config.json", "w");
   serializeJson(jsonConfig, config);
   config.close();
@@ -200,7 +201,7 @@ bool load_config() {
     ac.setFan(root["fan"]);
     ac.setMode(root["mode"]);
     ac.setSwingVertical(root["swingVertical"]);
-    ac.setPower(power_on_start);
+    ac.setPower(root["powerStatus"]);
     return true;
   }
   else return false;
@@ -334,7 +335,7 @@ void setup() {
     ac.setFan(root["fan"]);
     ac.setMode(root["mode"]);
     ac.setSwingVertical(root["swingVertical"]);
-    ac.setPower(power_on_start);
+    ac.setPower(root["powerStatus"]);
   }
   else {
     ac.setTemp(acState.temperature);
